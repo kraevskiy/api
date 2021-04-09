@@ -1,8 +1,12 @@
+require('dotenv').config({
+  path: `.env`
+})
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby WordPress Starter`,
     description: `Kick off your next, great Gatsby project with this WordPress starter.`,
-    author: `@tomphill`,
+    author: `illia`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -24,17 +28,17 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
     {
       resolve: "gatsby-source-wordpress",
       options: {
         minimizeDeprecationNotice: true,
-        baseUrl: "gatsby-wordpress-course.local",
-        protocol: "http",
+        baseUrl: process.env.API_URL,
+        protocol: process.env.API_PROTOCOL,
         hostingWPCOM: false,
-        useACF: false,
+        useACF: true,
         verboseOutput: false,
         perPage: 100,
         concurrentRequests: 10,
@@ -46,6 +50,10 @@ module.exports = {
           "**/tags",
           "**/taxonomies",
           "**/users",
+          "**/menus",
+          "**/portfolio",
+          "**/logo",
+          "**/favicon"
         ],
       },
     },
